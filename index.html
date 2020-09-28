@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./index.css"/>
+</head>
+<body>
+    
+    <div class="controls">
+        <lebel for="border-radius">Border radius:</lebel>
+        <input
+        id="border-radius"
+        type="range"
+        name="border-radius"
+        min="0"
+        max="100"
+        value="0"
+        data-sizing="%"
+        />
+
+        <lebel for="spacing">Spacing:</lebel>
+        <input
+        id="spacing"
+        type="range"
+        name="spacing"
+        min="0"
+        max="100"
+        value="0"
+        data-sizing="px"
+        />
+
+        <lebel for="blur">blur:</lebel>
+        <input
+        id="blur"
+        type="range"
+        name="blur"
+        min="0"
+        max="25"
+        value="10"
+        data-sizing="px"
+        />
+
+        <lebel for="base">Base color:</lebel>   
+        <input id="base" type="color" name="base" value="#282928" />
+
+        <lebel for="bg">Background color:</lebel>   
+        <input id="bg" type="color" name="bg" value="#282928" />
+
+        <lebel for="fc">Font color:</lebel>   
+        <input id="fc" type="color" name="fc" value="#282928" />
+    </div>
+
+    <h1>Mystagram</h1>
+    <input type="text" class="search" placeholder="Search photo"/>
+    <div class="gallery">
+
+    </div>
+    <script src="./index.js"></script>
+    
+</body>
+</html>
