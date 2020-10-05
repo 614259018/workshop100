@@ -1,42 +1,34 @@
-function addImage(keyword,index){
-    const imgElement = document.createElement('img');
-    imgElement.src=`https://source.unsplash.com/400x225?${keyword}&sig=${index}`;
-    imgElement.className="img"+index;
+const express = require('express');
+const indexRouter = require('./routes/index');
+const path = require('path');
 
-    const gallery = document.querySelector(".gallery");
-    gallery.appendChild(imgElement);
-}
+// 1. Configuration here
+const morgan = require('morgan');
+const cors = require('cors');
+const PORT = process.env.PORT|| 8080;
 
-function removeAllPhoto(){
-    const gallery = document.querySelector(".gallery");
-    gallery.innerHTML = '';
-}
 
-function searchPhoto(event){
-    const keyword = event.target.value;
-    //console.log(keyword);
-    if(event.key === 'Enter' && keyword){
-        removeAllPhoto();
-        for(let i =0;i<9;i++){
-            addImage(keyword,i);
-        }
-    }
-}
+const fetch = require('node-fetch');
+global.fetch = fetch;
 
-function handleUpdate(){
+const app = express();
 
-    const suffix = this.dataset.sizing || '';
+//Middleware เพื่ออ่าน req.body
+app.use(express.json());
+app.use(express.urlencoded({extended:false}))
 
-    document.documentElement.style.setProperty(`--${this.name}`,this.value+suffix);
-}
+//router
+app.use('/', indexRouter);
 
-function main(){
-    const controlInput = document.querySelectorAll('.controls input');
-    console.log(controlInput);
-    controlInput.forEach((input)=>{input.addEventListener('change',handleUpdate)});
+//Middleware
+app.use(cors());
+app.use(morgan('common'));
+app.use(express.static(path.join(__dirname,'public')));
 
-    const inputElement = document.querySelector('.search');
-    inputElement.addEventListener('keydown',searchPhoto);
-}
 
-main();
+app.listen(
+  PORT,
+  () => {
+    console.log(`Listening to port ${PORT}`);
+  }
+);
